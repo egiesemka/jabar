@@ -7,6 +7,7 @@ use App\Cuti;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Mail;
 
 class CutiController extends Controller
 {
@@ -63,6 +64,8 @@ class CutiController extends Controller
         }
 
         //validasi tgl cuti udh dipakai belum
+
+        
         
         
 
@@ -93,6 +96,23 @@ class CutiController extends Controller
         $user->keterangan_balasan_cuti= '';
         // add other fields
         $user->save();
+
+
+        //send mail to atasan
+        $to_name = 'Pegawai';
+        $to_email = 'jabarjuara2019@gmail.com';
+        $nama_Atasan = User::select('name')->where('id','=',$idAtasan)->get();
+        $nama_Atasan = $nama_Atasan[0]['name'];
+
+        $data = array('name'=>$nama_Atasan, "body" => "Ada data cuti baru dari bawahanmu!");
+            
+        Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)
+                    ->subject('Ada Cuti Baru!');
+            $message->from('jabarjuara2019@gmail.com','Jabar');
+        });
+
+
         return $user;
     }
 
@@ -185,6 +205,20 @@ class CutiController extends Controller
         $Userss = Cuti::where('id', '=', $id )->where('dituju_cuti', '=', $saya )->firstOrFail();
         $Userss->status = 'ditolak';
         $Userss->save();
+
+        //send mail to atasan
+        $to_name = 'Pegawai';
+        $to_email = 'jabarjuara2019@gmail.com';
+        $namaPengaju = Cuti::select('name')->join('users','users.id','=','cutis.pengaju_cuti')->where('cutis.id','=',$id)->get();
+        $namaPengaju = $namaPengaju[0]['name'];
+
+        $data = array('name'=>$namaPengaju, "body" => "Pengajuan cuti anda ditolak!");
+            
+        Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)
+                    ->subject('Ada Cuti Baru!');
+            $message->from('jabarjuara2019@gmail.com','Jabar');
+        });
        
 
         return $Userss;
@@ -196,7 +230,21 @@ class CutiController extends Controller
         $Userss = Cuti::where('id', '=', $id )->where('dituju_cuti', '=', $saya )->firstOrFail();
         $Userss->status = 'diterima';
         $Userss->save();
-       
+        
+        //send mail to atasan
+        $to_name = 'Pegawai';
+        $to_email = 'jabarjuara2019@gmail.com';
+        $namaPengaju = Cuti::select('name')->join('users','users.id','=','cutis.pengaju_cuti')->where('cutis.id','=',$id)->get();
+        $namaPengaju = $namaPengaju[0]['name'];
+
+        $data = array('name'=>$namaPengaju, "body" => "Pengajuan cuti anda diterima!");
+            
+        Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)
+                    ->subject('Ada Cuti Baru!');
+            $message->from('jabarjuara2019@gmail.com','Jabar');
+        });
+
         return $Userss;
     }
 

@@ -63,7 +63,7 @@
                                     <td v-if="post.status=='menunggu'"><span class="badge bg-yellow">{{post.status}}</span></td>
                                     <td v-else-if="post.status=='ditolak'"><span class="badge bg-red">{{post.status}}</span></td>
                                     <td v-else><span class="badge bg-green">{{post.status}}</span></td>
-                                    <td v-if="post.satus=='menunggu'">
+                                    <td v-if="post.status=='menunggu'">
                                         <button v-on:click="submitPostTerima(post.id, index)" class="btn btn-xs bg-green margin">Terima</button>
                                         <button v-on:click="submitPostTolak(post.id, index)"  class="btn btn-xs bg-maroon margin">Tolak</button>
                                         <router-link :to="{name: 'readPostDetail', params:{id:post.id}}" class="btn btn-xs btn-primary" style="color:#fff"><i class="fa fa-eye"></i> Detail</router-link>
@@ -216,7 +216,7 @@ export default {
             .then(response => {
 
                 swal.fire(
-                'Ditolak!',
+                'Diterima!',
                 'Data Berhasil Diterima',
                 'success'
                 )

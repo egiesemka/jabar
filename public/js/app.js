@@ -2803,7 +2803,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/cuti/terima/" + id).then(function (response) {
-            swal.fire('Ditolak!', 'Data Berhasil Diterima', 'success');
+            swal.fire('Diterima!', 'Data Berhasil Diterima', 'success');
 
             _this4.$Progress.finish(); // console.log(response)
 
@@ -62107,7 +62107,7 @@ var render = function() {
                                   )
                                 ]),
                             _vm._v(" "),
-                            post.satus == "menunggu"
+                            post.status == "menunggu"
                               ? _c(
                                   "td",
                                   [
