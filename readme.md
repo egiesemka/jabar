@@ -1,4 +1,12 @@
 ## DEMO : - [youtube link saya disini untuk demo aplikasinya](https://www.youtube.com/watch?v=T_LKQcf5x0E).
+
+## Keterangan:
+
+- Dalam project ini saya menggunkan laravel 5.8 dengan frontend menggunakan Vuejs 2.x dan menggunakan template adminLTE!
+
+
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
