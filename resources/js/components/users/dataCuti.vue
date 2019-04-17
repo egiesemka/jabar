@@ -55,7 +55,7 @@
                             <tbody>
                                 <tr v-for="(post,index) in laravelData.data" :key="post.id">
                                     <th>{{((laravelData.current_page-1)*laravelData.per_page)+index+1}}</th>
-                                    <td>{{post.lama_cuti}}</td>
+                                    <td>{{post.lama_cuti}} Hari</td>
                                     <td>{{post.tgl_cuti_mulai | tanggal}} - {{post.tgl_cuti_selesai | tanggal}}</td>
                                     <td>{{post.keterangan_cuti}}</td>
                                     <!-- <td>{{post.keterangan_balasan_cuti}}</td> -->

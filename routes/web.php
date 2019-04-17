@@ -93,6 +93,8 @@ Route::group([
         Route::get('/print/{id}', 'CutiController@print');
         Route::get('/print_admin/{id}', 'CutiController@parintAdmin');
 
+        Route::get('/count', 'HomeController@countdashboard');
+
 
 });
 

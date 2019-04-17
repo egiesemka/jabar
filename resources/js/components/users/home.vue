@@ -27,7 +27,7 @@
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                    <h3>150</h3>
+                    <h3>{{posts.datacutiall}}</h3>
 
                     <p>Data Cuti Anda</p>
                     </div>
@@ -42,7 +42,7 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                    <h3>53</h3>
+                    <h3>{{posts.kuotacuti}}</h3>
 
                     <p>Sisa Kuota Cuti Tahun Ini</p>
                     </div>
@@ -57,7 +57,7 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                    <h3>44</h3>
+                    <h3>{{posts.menunggupersetujuan}}</h3>
 
                     <p>Menunggu Persetujuan</p>
                     </div>
@@ -72,7 +72,7 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                    <h3>65</h3>
+                    <h3>{{posts.diterimacuti}}</h3>
 
                     <p>Cuti Yang Disetujui</p>
                     </div>
@@ -109,6 +109,7 @@ export default {
     return {
       laravelData: {},
       nama:'',
+       posts: [], 
       // url:'/pelanggan',
       errors: []
     }
@@ -121,7 +122,27 @@ export default {
   
   mounted() {
 		this.getName();
-	},
+    },
+  created() {
+    this.$Progress.start()
+
+    axios.get(`/count`)
+    .then(response => {
+      // console.log('tes');
+      // console.log(response.data)
+      this.posts = response.data
+      this.$Progress.finish()
+    })
+    .catch(e => {
+      // console.log(e.response.status);
+      this.errors.push(e)
+      this.$Progress.fail()
+      if(e.response.status==404){
+        this.$router.push({path:'/'})
+      }
+    })
+
+  },  
 
   methods:{
     

@@ -2676,7 +2676,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
       this.$router.push({
-        path: '/permohonan-cuti'
+        path: '/data-cuti'
       })["catch"](function (e) {
         _this2.$Progress.fail(); // this.errors.push(e)
         // console.log(e.response)
@@ -3406,6 +3406,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       laravelData: {},
       nama: '',
+      posts: [],
       // url:'/pelanggan',
       errors: []
     };
@@ -3418,13 +3419,36 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.getName();
   },
+  created: function created() {
+    var _this = this;
+
+    this.$Progress.start();
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/count").then(function (response) {
+      // console.log('tes');
+      // console.log(response.data)
+      _this.posts = response.data;
+
+      _this.$Progress.finish();
+    })["catch"](function (e) {
+      // console.log(e.response.status);
+      _this.errors.push(e);
+
+      _this.$Progress.fail();
+
+      if (e.response.status == 404) {
+        _this.$router.push({
+          path: '/'
+        });
+      }
+    });
+  },
   methods: {
     getName: function getName() {
-      var _this = this;
+      var _this2 = this;
 
       var url = '/getName';
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
-        _this.nama = response.data.name; // console.log(this.laravelData.name)
+        _this2.nama = response.data.name; // console.log(this.laravelData.name)
       });
     }
   }
@@ -62405,7 +62429,9 @@ var render = function() {
                               )
                             ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(post.lama_cuti))]),
+                            _c("td", [
+                              _vm._v(_vm._s(post.lama_cuti) + " Hari")
+                            ]),
                             _vm._v(" "),
                             _c("td", [
                               _vm._v(
@@ -62606,7 +62632,63 @@ var render = function() {
       _vm._v(" "),
       _c("menuApp"),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "content-wrapper" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("section", { staticClass: "content" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
+              _c("div", { staticClass: "small-box bg-aqua" }, [
+                _c("div", { staticClass: "inner" }, [
+                  _c("h3", [_vm._v(_vm._s(_vm.posts.datacutiall))]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Data Cuti Anda")])
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
+              _c("div", { staticClass: "small-box bg-green" }, [
+                _c("div", { staticClass: "inner" }, [
+                  _c("h3", [_vm._v(_vm._s(_vm.posts.kuotacuti))]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Sisa Kuota Cuti Tahun Ini")])
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
+              _c("div", { staticClass: "small-box bg-yellow" }, [
+                _c("div", { staticClass: "inner" }, [
+                  _c("h3", [_vm._v(_vm._s(_vm.posts.menunggupersetujuan))]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Menunggu Persetujuan")])
+                ]),
+                _vm._v(" "),
+                _vm._m(3)
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
+              _c("div", { staticClass: "small-box bg-green" }, [
+                _c("div", { staticClass: "inner" }, [
+                  _c("h3", [_vm._v(_vm._s(_vm.posts.diterimacuti))]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Cuti Yang Disetujui")])
+                ]),
+                _vm._v(" "),
+                _vm._m(4),
+                _vm._v(" "),
+                _vm._m(5)
+              ])
+            ])
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _c("footerApp")
     ],
@@ -62618,93 +62700,63 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-wrapper" }, [
-      _c("section", { staticClass: "content-header" }, [
-        _c("h1", [
-          _vm._v("\n            Dashboard\n            "),
-          _c("small", [_vm._v("Control panel")])
-        ]),
-        _vm._v(" "),
-        _c("ol", { staticClass: "breadcrumb" }, [
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fa fa-dashboard" }),
-              _vm._v(" Home")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "active" }, [_vm._v("Dashboard")])
-        ])
+    return _c("section", { staticClass: "content-header" }, [
+      _c("h1", [
+        _vm._v("\n            Dashboard\n            "),
+        _c("small", [_vm._v("Control panel")])
       ]),
       _vm._v(" "),
-      _c("section", { staticClass: "content" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
-            _c("div", { staticClass: "small-box bg-aqua" }, [
-              _c("div", { staticClass: "inner" }, [
-                _c("h3", [_vm._v("150")]),
-                _vm._v(" "),
-                _c("p", [_vm._v("Data Cuti Anda")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "icon" }, [
-                _c("i", { staticClass: "ion ion-stats-bars" })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
-            _c("div", { staticClass: "small-box bg-green" }, [
-              _c("div", { staticClass: "inner" }, [
-                _c("h3", [_vm._v("53")]),
-                _vm._v(" "),
-                _c("p", [_vm._v("Sisa Kuota Cuti Tahun Ini")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "icon" }, [
-                _c("i", { staticClass: "ion ion-stats-bars" })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
-            _c("div", { staticClass: "small-box bg-yellow" }, [
-              _c("div", { staticClass: "inner" }, [
-                _c("h3", [_vm._v("44")]),
-                _vm._v(" "),
-                _c("p", [_vm._v("Menunggu Persetujuan")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "icon" }, [
-                _c("i", { staticClass: "ion ion-stats-bars" })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-3 col-xs-6" }, [
-            _c("div", { staticClass: "small-box bg-green" }, [
-              _c("div", { staticClass: "inner" }, [
-                _c("h3", [_vm._v("65")]),
-                _vm._v(" "),
-                _c("p", [_vm._v("Cuti Yang Disetujui")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "icon" }, [
-                _c("i", { staticClass: "ion ion-stats-bars" })
-              ]),
-              _vm._v(" "),
-              _c(
-                "a",
-                { staticClass: "small-box-footer", attrs: { href: "#" } },
-                [
-                  _vm._v("More info "),
-                  _c("i", { staticClass: "fa fa-arrow-circle-right" })
-                ]
-              )
-            ])
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _c("i", { staticClass: "fa fa-dashboard" }),
+            _vm._v(" Home")
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "active" }, [_vm._v("Dashboard")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-stats-bars" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-stats-bars" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-stats-bars" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-stats-bars" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+      _vm._v("More info "),
+      _c("i", { staticClass: "fa fa-arrow-circle-right" })
     ])
   }
 ]

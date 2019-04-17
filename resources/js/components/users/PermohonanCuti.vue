@@ -189,7 +189,7 @@ export default {
               })
         
         })
-        this.$router.push({path:'/permohonan-cuti'})
+        this.$router.push({path:'/data-cuti'})
         .catch(e => {
           this.$Progress.fail()
           // this.errors.push(e)
