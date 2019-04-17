@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Jabatan;
+// use App\Http\Controllers\Mail;
+use Mail;
 
 class UserController extends Controller
 {
@@ -105,5 +107,19 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function testemail()
+    {
+        $to_name = 'Pegawai';
+        $to_email = 'jabarjuara2019@gmail.com';
+
+        $data = array('name'=>"Sam Jose", "body" => "Ada data cuti baru dari bawahanmu!");
+            
+        Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)
+                    ->subject('Ada Cuti Baru!');
+            $message->from('jabarjuara2019@gmail.com','Artisans Web');
+        });
     }
 }

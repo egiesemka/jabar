@@ -19,6 +19,7 @@
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/tesemail','UserController@testemail');
 
 Route::post('/logins', [
 	'uses'	=> 'UserController@postLogin',
@@ -32,6 +33,11 @@ Route::get('/logins', function () {
 Route::get('/login', [
 	'uses'	=> 'UserController@index',
 	'as'	=> 'login'
+]);
+
+Route::get('/register', [
+	'uses'	=> 'UserController@postLogin',
+	'as'	=> 'postLogin'
 ]);
 
 
