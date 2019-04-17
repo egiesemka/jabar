@@ -2668,8 +2668,15 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/addCuti', this.posts).then(function (response) {
         _this2.$Progress.finish();
 
-        console.log(response); //   this.$router.push({path:'/data-layanan'})
-        //   this.posts = response.data
+        console.log(response); //   this.posts = response.data
+
+        Toast.fire({
+          type: 'success',
+          title: 'Data berhasil ditambah!'
+        });
+      });
+      this.$router.push({
+        path: '/permohonan-cuti'
       })["catch"](function (e) {
         _this2.$Progress.fail(); // this.errors.push(e)
         // console.log(e.response)
@@ -3263,9 +3270,9 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
-        _this2.$Progress.finish(); //   console.log(response.data)
+        _this2.$Progress.finish();
 
-
+        console.log(response.data);
         _this2.laravelData = response.data;
       });
     }
@@ -61505,11 +61512,7 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control pull-right",
-                                attrs: {
-                                  type: "date",
-                                  id: "reservation",
-                                  required: ""
-                                },
+                                attrs: { type: "date", id: "reservation" },
                                 domProps: { value: _vm.posts.tgl_selesai_cuti },
                                 on: {
                                   input: function($event) {
@@ -62021,11 +62024,11 @@ var render = function() {
                   _c("h4", [_vm._v("Atasan Saya:")]),
                   _vm._v(" "),
                   _c("h3", { staticClass: "profile-username text-center" }, [
-                    _vm._v(_vm._s(_vm.posts.pengaju))
+                    _vm._v(_vm._s(_vm.posts.atasan))
                   ]),
                   _vm._v(" "),
                   _c("p", { staticClass: "btn btn-primary btn-block" }, [
-                    _vm._v(_vm._s(_vm.posts.nama_jabatan))
+                    _vm._v(_vm._s(_vm.posts.jabatan_atasan))
                   ])
                 ])
               ])
@@ -77717,9 +77720,9 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter('yanglalu', function (value) {
   moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('id');
   return moment__WEBPACK_IMPORTED_MODULE_0___default()(value).startOf('hour').fromNow();
 });
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter('tanggal', function () {
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter('tanggal', function (value) {
   moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('id');
-  return moment__WEBPACK_IMPORTED_MODULE_0___default()().format('dddd, Do MMMM  YYYY');
+  return moment__WEBPACK_IMPORTED_MODULE_0___default()(value).format('dddd, Do MMMM  YYYY');
 });
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.filter('tgldoang', function (value) {
   moment__WEBPACK_IMPORTED_MODULE_0___default.a.locale('id');

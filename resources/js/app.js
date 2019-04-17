@@ -186,9 +186,9 @@ Vue.filter('yanglalu', function (value) {
   return moment(value).startOf('hour').fromNow(); 
 });
 
-Vue.filter('tanggal', function () {
+Vue.filter('tanggal', function (value) {
   moment.locale('id'); 
-  return moment().format('dddd, Do MMMM  YYYY');
+  return moment(value).format('dddd, Do MMMM  YYYY');
 });
 
 Vue.filter('tgldoang', function (value) {

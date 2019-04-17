@@ -145,7 +145,7 @@ export default {
 			axios.get(url)
 				.then(response => {
           this.$Progress.finish()
-        //   console.log(response.data)
+          console.log(response.data)
 					this.laravelData = response.data;
 				});
 		},

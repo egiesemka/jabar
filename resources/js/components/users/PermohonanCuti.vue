@@ -69,7 +69,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input type="date" class="form-control pull-right" id="reservation" v-model="posts.tgl_selesai_cuti" required>
+                                <input type="date" class="form-control pull-right" id="reservation" v-model="posts.tgl_selesai_cuti">
                                 <span v-if="errors.tgl_selesai_cuti" class="text-danger">{{errors.tgl_selesai_cuti[0]}}</span>
                                 </div>
                                 <!-- /.input group -->
@@ -181,10 +181,15 @@ export default {
         .then(response => {
           this.$Progress.finish()    
           console.log(response)
-        //   this.$router.push({path:'/data-layanan'})
+          
         //   this.posts = response.data
+        Toast.fire({
+                type: 'success',
+                title: 'Data berhasil ditambah!'
+              })
         
         })
+        this.$router.push({path:'/permohonan-cuti'})
         .catch(e => {
           this.$Progress.fail()
           // this.errors.push(e)

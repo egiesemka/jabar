@@ -54,6 +54,11 @@ class CutiController extends Controller
         ]);
         $id_user=Auth::user()->id;
 
+        if($request['tgl_selesai_cuti'] =='' || $request['tgl_selesai_cuti'] == null)
+        {
+            $request['tgl_selesai_cuti'] = $request['tgl_mulai_cuti'];
+        }
+
         $idAtasan = User::select('atasan_id')->where('id','=',$id_user)->get();
         $idAtasan = $idAtasan[0]['atasan_id'];
         
@@ -201,10 +206,11 @@ class CutiController extends Controller
     {
         $sayaPengaju=Auth::user()->id;
         // return Users::FindOrFail($id);
-        return  Cuti::select('cutis.*', 'NamaPengaju.name as pengaju', 'NamaAtasan.name as atasan' , 'jabatans.nama_jabatan')
+        return  Cuti::select('cutis.*', 'NamaPengaju.name as pengaju', 'NamaAtasan.name as atasan' , 'jabatans.nama_jabatan', 'jb.nama_jabatan as jabatan_atasan')
                     ->join('users as NamaPengaju', 'cutis.pengaju_cuti', '=', 'NamaPengaju.id')
                     ->join('users as NamaAtasan', 'cutis.dituju_cuti', '=', 'NamaAtasan.id')
                     ->join('jabatans', 'NamaPengaju.nama_jabatan','=','jabatans.id')
+                    ->join('jabatans as jb', 'NamaAtasan.nama_jabatan','=','jb.id')
                     ->where('pengaju_cuti', '=', $sayaPengaju)
                     ->where('cutis.id', '=', $id)
                     ->firstOrFail();

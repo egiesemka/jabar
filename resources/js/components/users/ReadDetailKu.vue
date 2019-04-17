@@ -28,9 +28,9 @@
             <div class="box-body box-profile">
               <!-- <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture"> -->
               <h4>Atasan Saya:</h4>
-              <h3 class="profile-username text-center">{{posts.pengaju}}</h3>
+              <h3 class="profile-username text-center">{{posts.atasan}}</h3>
 
-              <p class="btn btn-primary btn-block">{{posts.nama_jabatan}}</p>
+              <p class="btn btn-primary btn-block">{{posts.jabatan_atasan}}</p>
 
               
               
