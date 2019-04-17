@@ -17,11 +17,11 @@ class CreateCutisTable extends Migration
             $table->bigIncrements('id');
             $table->string('pengaju_cuti');
             $table->string('dituju_cuti');
-            $table->string('tgl_cuti_mulai');
-            $table->string('tgl_cuti_selesai');
+            $table->date('tgl_cuti_mulai');
+            $table->date('tgl_cuti_selesai')->nullable();
             $table->string('status');
-            $table->string('keterangan_cuti');
-            $table->string('keterangan_balasan_cuti');
+            $table->string('keterangan_cuti')->nullable();
+            $table->string('keterangan_balasan_cuti')->nullable();
             $table->timestamps();
         });
     }
