@@ -180,16 +180,26 @@ export default {
         axios.post('/addCuti', this.posts)
         .then(response => {
           this.$Progress.finish()    
-          console.log(response)
-          
-        //   this.posts = response.data
-        Toast.fire({
+        //   console.log(response)
+            let pesan = response.data.pesan
+
+          if(response.data.error==true){
+               Toast.fire({
+                type: 'error',
+                title: pesan
+              })
+          }else{
+               Toast.fire({
                 type: 'success',
                 title: 'Data berhasil ditambah!'
               })
+          }
+          
+        //   this.posts = response.data
+       
         
         })
-        this.$router.push({path:'/data-cuti'})
+        // this.$router.push({path:'/data-cuti'})
         .catch(e => {
           this.$Progress.fail()
           // this.errors.push(e)

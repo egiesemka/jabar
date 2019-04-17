@@ -53,6 +53,18 @@ class CutiController extends Controller
             'tgl_mulai_cuti' => 'required',
         ]);
         $id_user=Auth::user()->id;
+        $yearNow = Carbon::now()->year;   
+
+        //validasi kuota cuti
+        $datacutiall = Cuti::where('pengaju_cuti', '=', $id_user)->whereYear('created_at', '=', $yearNow)->count();
+        if($datacutiall>12)
+        {
+            return response()->json(['error' => true, 'pesan' => 'anda sudah melebihi kuota cuti anda tahun ini!']);
+        }
+
+        //validasi tgl cuti udh dipakai belum
+        
+        
 
         if($request['tgl_selesai_cuti'] =='' || $request['tgl_selesai_cuti'] == null)
         {
@@ -261,6 +273,60 @@ class CutiController extends Controller
     public function printAdmin($id)
     {
         return view('printAdmin');
+    }
+
+    public function admincetak(Request $request)
+    {
+       
+        // return Users::all(); 
+        // $id_user=Auth::user()->id;
+        // $data = Users::all();
+        $search =  $request->search;
+        $data=Cuti::select('cutis.*', 'NamaPengaju.name as pengaju', 'NamaAtasan.name as atasan')
+                        ->join('users as NamaPengaju', 'cutis.pengaju_cuti', '=', 'NamaPengaju.id')
+                        ->join('users as NamaAtasan', 'cutis.dituju_cuti', '=', 'NamaAtasan.id')
+                        ->where('status', '=', 'diterima')
+                        ->where(function ($query)  use ($search)
+                        {
+                        $query->where('tgl_cuti_mulai', 'LIKE', "%$search%")
+                                ->orWhere('tgl_cuti_selesai', 'LIKE', "%$search%")
+                                ->orWhere('status', 'LIKE', "%$search%")
+                                ->orWhere('keterangan_cuti', 'LIKE', "%$search%")
+                                ->orWhere('keterangan_balasan_cuti', 'LIKE', "%$search%")
+                                ->orWhere('NamaAtasan.name', 'LIKE', "%$search%")
+                                ->orWhere('NamaPengaju.name', 'LIKE', "%$search%");
+                        })
+                        ->orderBy('created_at','DESC')
+                        ->paginate(10);
+                    
+        return response()->json($data);
+    }
+
+    public function adminall(Request $request)
+    {
+       
+        // return Users::all(); 
+        // $id_user=Auth::user()->id;
+        // $data = Users::all();
+        $search =  $request->search;
+        $data=Cuti::select('cutis.*', 'NamaPengaju.name as pengaju', 'NamaAtasan.name as atasan')
+                        ->join('users as NamaPengaju', 'cutis.pengaju_cuti', '=', 'NamaPengaju.id')
+                        ->join('users as NamaAtasan', 'cutis.dituju_cuti', '=', 'NamaAtasan.id')
+                        // ->where('status', '=', 'diterima')
+                        ->where(function ($query)  use ($search)
+                        {
+                        $query->where('tgl_cuti_mulai', 'LIKE', "%$search%")
+                                ->orWhere('tgl_cuti_selesai', 'LIKE', "%$search%")
+                                ->orWhere('status', 'LIKE', "%$search%")
+                                ->orWhere('keterangan_cuti', 'LIKE', "%$search%")
+                                ->orWhere('keterangan_balasan_cuti', 'LIKE', "%$search%")
+                                ->orWhere('NamaAtasan.name', 'LIKE', "%$search%")
+                                ->orWhere('NamaPengaju.name', 'LIKE', "%$search%");
+                        })
+                        ->orderBy('created_at','DESC')
+                        ->paginate(10);
+                    
+        return response()->json($data);
     }
 
 }

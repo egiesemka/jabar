@@ -17,9 +17,11 @@
             <li class="header">MAIN NAVIGATION</li>
 
             <li><router-link to="/"><i class="fa fa-circle-o text-red"></i> <span>Home</span></router-link></li>
-            <li><router-link to="/permohonan-cuti"><i class="fa fa-circle-o text-yellow"></i> <span>Pengajuan Cuti</span></router-link></li>
-             <li><router-link to="/permintaan-cuti"><i class="fa fa-circle-o text-yellow"></i> <span>Permintaan Cuti</span></router-link></li>
-            <li><router-link to="/data-cuti"><i class="fa fa-circle-o text-aqua"></i> <span>Data Cuti</span></router-link></li>
+            <li v-if="role!='admin'"><router-link to="/permohonan-cuti"><i class="fa fa-circle-o text-yellow"></i> <span>Pengajuan Cuti</span></router-link></li>
+             <li v-if="role!='admin'"><router-link to="/permintaan-cuti"><i class="fa fa-circle-o text-yellow"></i> <span>Permintaan Cuti</span></router-link></li>
+            <li v-if="role!='admin'"><router-link to="/data-cuti"><i class="fa fa-circle-o text-aqua"></i> <span>Data Cuti</span></router-link></li>
+             <li v-if="role=='admin'"><router-link to="/data-cuti-admin-cetak"><i class="fa fa-print text-aqua"></i> <span>Data Siap Cetak</span></router-link></li>
+             <li v-if="role=='admin'"><router-link to="/data-cuti-admin-all"><i class="fa fa-print text-aqua"></i> <span>Data All</span></router-link></li>
         </ul>
         </section>
         <!-- /.sidebar -->
@@ -34,6 +36,7 @@ export default {
     return {
     //   laravelData: {},
       nama:'',
+      role:'',
       // url:'/pelanggan',
       errors: []
     }
@@ -52,6 +55,7 @@ export default {
         axios.get(url)
             .then(response => {
                 this.nama = response.data.name;
+                this.role = response.data.role;
                 // console.log(this.laravelData.name)
             });
     },

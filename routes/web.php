@@ -104,8 +104,22 @@ Route::group([
 
 	,function(){
 
-        Route::get('/admin', function(){
-            return "test";
-        });
+        Route::get('/admin', [
+            'uses'	=> 'HomeController@admin',
+            'as'	=> 'homeAdmin'
+        ]);
+
+        Route::get('/datacutis-cetak', [
+            'uses'	=> 'CutiController@admincetak',
+            'as'	=> 'dataCutisCetak'
+        ]);
+
+        Route::get('/datacutis-all', [
+            'uses'	=> 'CutiController@adminall',
+            'as'	=> 'dataCutisAll'
+        ]);
+
+
+        
 
 });

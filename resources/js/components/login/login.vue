@@ -68,7 +68,7 @@ export default {
             //   alert('login berhasil')
             let urlNext= response.data.jabatan
             if(urlNext=='admin'){
-                urlNext='/pengelola'
+                urlNext='/admin'
             }else{
                 urlNext=BaseUrl
             }

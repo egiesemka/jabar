@@ -15,7 +15,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Data Cuti</li>
+                <li class="active">Data Cuti ALL</li>
             </ol>
             </section>
 
@@ -62,7 +62,8 @@
                                     <td v-if="post.status=='menunggu'"><span class="badge bg-yellow">{{post.status}}</span></td>
                                     <td v-else-if="post.status=='ditolak'"><span class="badge bg-red">{{post.status}}</span></td>
                                     <td v-else><span class="badge bg-green">{{post.status}}</span></td>
-                                    <td><router-link :to="{name: 'readPostDetailSaya', params:{id:post.id}}" class="btn btn-xs btn-primary" style="color:#fff"><i class="fa fa-eye"></i> Detail</router-link>
+                                    <td>
+                                        <!-- <router-link :to="{name: 'readPostDetailSaya', params:{id:post.id}}" class="btn btn-xs btn-primary" style="color:#fff"><i class="fa fa-eye"></i> Detail</router-link> -->
                                         <a :href="'/print/' + post.id">Print</a>
                                     </td>
                                 </tr>
@@ -138,9 +139,9 @@ export default {
       // console.log(this.search)
       // console.log(page)
       if(this.search==''){
-        var url = '/datacutis?page=' + page;
+        var url = '/datacutis-all?page=' + page;
       }else{
-        var url = `/datacutis?search=${this.search}`;
+        var url = `/datacutis-all?search=${this.search}`;
       }
 			axios.get(url)
 				.then(response => {

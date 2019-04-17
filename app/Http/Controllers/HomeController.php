@@ -56,4 +56,9 @@ class HomeController extends Controller
                                     'diterimacuti' => $diterimacuti
                                     ));
     }
+
+    public function admin()
+    {
+        return view('admin');
+    }
 }

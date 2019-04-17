@@ -46,6 +46,11 @@ import Read_detail from './components/users/ReadDetail.vue';
 import Read_detail_saya from './components/users/ReadDetailKu.vue';
 
 
+//mimin
+import DataCutiAdminAll from './components/admins/dataCutiAll.vue';
+import DataCutiAdminCetak from './components/admins/dataCutiCetak.vue';
+
+
 
 import Print from './components/Print.vue';
 
@@ -66,6 +71,7 @@ const routes = [
       components: {
         default: Home,
         login: Login_show,
+        admin:Home,
         print: Print,
       },
       meta: {
@@ -127,6 +133,46 @@ const routes = [
       components: {
         default: DataCuti,
         admin: Login_show
+      },
+      meta: {
+        title: 'Dashboard - Cuti Online',
+        metaTags: [
+          {
+            name: 'description',
+            content: 'The home page of our example app.'
+          },
+          {
+            property: 'og:description',
+            content: 'The home page of our example app.'
+          }
+        ]
+      }
+    },
+    { path: '/data-cuti-admin-all', 
+    //   component: Admin_home,
+      components: {
+        default: Login_show,
+        admin: DataCutiAdminAll
+      },
+      meta: {
+        title: 'Dashboard - Cuti Online',
+        metaTags: [
+          {
+            name: 'description',
+            content: 'The home page of our example app.'
+          },
+          {
+            property: 'og:description',
+            content: 'The home page of our example app.'
+          }
+        ]
+      }
+    },
+    { path: '/data-cuti-admin-cetak', 
+    //   component: Admin_home,
+      components: {
+        default: Login_show,
+        admin: DataCutiAdminCetak
       },
       meta: {
         title: 'Dashboard - Cuti Online',
